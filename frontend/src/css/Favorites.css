@@ -12,6 +12,16 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: start;
+}
+
 .favorites-empty {
   text-align: center;
   padding: 4rem 2rem;

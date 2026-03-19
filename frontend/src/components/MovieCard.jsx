@@ -1,9 +1,13 @@
 import "../css/MovieCard.css";
-import { useMovieContext } from "../contexts/MovieContext";
+import { useMovieContext } from "../contexts/useMovieContext";
+import { useState } from "react";
 
 function MovieCard({ movie }) {
-  const { addToFavorites, removeFromFavorites, isFavorite } = useMovieContext();
+  const { addToFavorites, removeFromFavorites, isFavorite, getGenreNames } =
+    useMovieContext();
   const favorite = isFavorite(movie.id);
+  const genreNames = getGenreNames(movie.genre_ids);
+  const [imageError, setImageError] = useState(false);
 
   function onFavoriteClick(e) {
     e.preventDefault();
@@ -14,12 +18,17 @@ function MovieCard({ movie }) {
     }
   }
 
+  const posterSrc = movie.poster_path
+    ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+    : "/no-image.svg";
+
   return (
     <div className="movie-card">
       <div className="movie-poster">
         <img
-          src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
+          src={imageError ? "/no-image.svg" : posterSrc}
           alt={movie.title}
+          onError={() => setImageError(true)}
         />
         <div className="movie-overlay">
           <button
@@ -32,7 +41,24 @@ function MovieCard({ movie }) {
       </div>
       <div className="movie-info">
         <h3>{movie.title}</h3>
-        <p>{movie.release_date?.split("-")[0]}</p>
+        <div className="movie-meta">
+          <span className="release-year">
+            {movie.release_date?.split("-")[0]}
+          </span>
+          {movie.vote_average && (
+            <span className="rating">⭐ {movie.vote_average.toFixed(1)}</span>
+          )}
+        </div>
+        {genreNames.length > 0 && (
+          <div className="genres">
+            {genreNames.map((genre) => (
+              <span key={genre} className="genre-tag">
+                {genre}
+              </span>
+            ))}
+          </div>
+        )}
+        {movie.overview && <p className="overview">{movie.overview}</p>}
       </div>
     </div>
   );

@@ -95,6 +95,47 @@
 .movie-info h3 {
   font-size: 1rem;
   margin: 0;
+  font-weight: 600;
+}
+
+.movie-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.release-year {
+  color: #999;
+}
+
+.rating {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.overview {
+  color: #bbb;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.genres {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.genre-tag {
+  background-color: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .movie-info p {

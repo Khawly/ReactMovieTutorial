@@ -1,6 +1,19 @@
 const API_KEY = "57efcaf2bee20bb34a6b563e0f2cb3cd";
 const BASE_URL = "https://api.themoviedb.org/3";
 
+export const getGenres = async () => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`
+    );
+    const data = await response.json();
+    return data.genres;
+  } catch (error) {
+    console.error("Error fetching genres:", error);
+    throw error;
+  }
+};
+
 export const getPopularMovies = async () => {
   try {
     const response = await fetch(
